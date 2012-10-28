@@ -1,12 +1,12 @@
-# ShinyFesta
+under construction.
 
-Tap into [The Echo Nest's](httpthe.echonest.com) Musical Brain for the best music search, information, recommendations and remix tools on the web.
+# ShinyFestaOriginalNotes
+ This software generates video files which imitate THE IDOLM@STER SHINY FESTA.
 
-Pyechonest is an open source Python library for the Echo Nest API.  With Pyechonest you have Python access to the entire set of API methods including
-
-   artist - search for artists by name, description, or attribute, and get back detailed information about any artist including audio, similar artists, blogs, familiarity, hotttnesss, news, reviews, urls and video.
-   song - search songs by artist, title, description, or attribute (tempo, duration, etc) and get detailed information back about each song, such as hotttnesss, audio_summary, or tracks.
-   track - upload a track to the Echo Nest and receive summary information about the track including key, duration, mode, tempo, time signature along with detailed track info including timbre, pitch, rhythm and loudness information.
+ you can create THE IDOLM@STER SHINY FESTA original note with following step.
+ * step 1: generates notes with this software.
+ * step 2: create video file with your video software. recommend: aviutl( http://spring-fragrance.mints.ne.jp/aviutl/ )
+ * step 3: obtain permission of the stake holders and show your score to everyone! recommend: nicovideo( http://www.nicovideo.jp/ ) with contents tree.
 
 ## Install
  under construction.
