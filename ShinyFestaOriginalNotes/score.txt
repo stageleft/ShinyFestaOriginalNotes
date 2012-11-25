@@ -1,0 +1,102 @@
+##############################
+##############################
+#####   Dazzling World   #####
+##############################
+##############################
+
+###########################
+# basic music param setup #
+# command:                #
+#  bpm beat_per_minutes   #
+#  high_speed note_speed  #
+###########################
+bpm        138
+high_speed 1.0
+
+##############################################
+# image setup                                #
+# command:                                   #
+#  image image_ID; image_file_name, isRotate #
+##############################################
+image left_score;           blue_arrow.png,    true
+image right_score;          red_arrow.png,     true
+image both_score;           green_arrow.png,   true
+image star_score;           star_arrow.png,    false
+image heart_score;          star_arrow.png,    false
+image left_line;            line.png,          true
+image left_line_end;        line_end.png,      true
+image right_line;           line.png,          true
+image right_line_end;       line_end.png,      true
+image left_long_score;      blue_line.png,     true
+image left_long_score_end;  blue_line_end.png, true
+image right_long_score;     red_line.png,      true
+image right_long_score_end; red_line_end.png,  true
+image target;               Target.png,        false
+
+################################################################################################
+# score and line setup                                                                         #
+# command:                                                                                     #
+#  score score_ID; target_parameters; base_line_image; long_score_image; score_description     #
+#    score_ID       as String                                                                  #
+#    target_parameters as String:                                                              #
+#      target_image,position_x,position_y                                                      #
+#        targt_image as image_ID(String)                                                       #
+#        position_x  as integer(0 to width_of_screen)                                          #
+#        position_y  as integer(0 to height_of_screen)                                         #
+#    base_line_image as String:                                                                #
+#      base_line,base_line_end                                                                 #
+#        base_line      as image_ID(String)                                                    #
+#        base_line_end  as image_ID(String)                                                    #
+#    long_score_image as String:                                                               #
+#      long_score,long_score_end                                                               #
+#        long_score     as image_ID(String)                                                    #
+#        long_score_end as image_ID(String)                                                    #
+#    score_description as String:                                                              #
+#      line_species:parameters,[line_species:parameters,...,line_species:parameters],Direction #
+#        case: line_species is line_note                                                       #
+#          parameter as Double: Direction of note                                              #
+#        case: line_species is circle_note                                                     #
+#          parameter1:parameter2 as Double                                                     #
+#            parameter 1: end Direction of note                                                #
+#            parameter 2: start Direction of note                                              #
+#        case: line_species is heart_note                                                      #
+#          parameter1:parameter2:parameter3:parameter4 as Double:                              #
+#            parameter 1: end Direction of note                                                #
+#            parameter 2: start Direction of note                                              #
+#            parameter 3: offset of Direction set                                              #
+#            parameter 4: Direction set length                                                 #
+################################################################################################
+#左手用 名称「l_line」長さ4[beat]、角度0[pi-rad]固定
+score l_line;target,427,340;left_line,left_line_end;left_long_score,left_long_score_end;line_note:0,line_note:0,line_note:0,line_note:0,0
+#左手用 名称「triangle_line」長さ6[beat]
+score triangle_line;target,427,240;left_line,left_line_end;left_long_score,left_long_score_end;line_note:-0.33,line_note:0.33,line_note:-0.33,line_note:0.33,line_note:-0.33,line_note:0.33,0.33
+#右手用 名称「r_line」長さ4[beat]、角度1[pi-rad]固定
+score r_line;target,427,340;right_line,right_line_end;right_long_score,right_long_score_end;line_note:1,line_note:1,line_note:1,line_note:1,1
+#右手用 名称「heart_line」長さ8[beat]、角度0[pi-rad]固定
+score heart_line;target,457,290;right_line,right_line_end;right_long_score,right_long_score_end;heart_note:1:-0.5:7:8,heart_note:1:-0.5:6:8,heart_note:1:-0.5:5:8,heart_note:1:-0.5:4:8,heart_note:1:-0.5:3:8,heart_note:1:-0.5:2:8,heart_note:1:-0.5:1:8,heart_note:1:-0.5:0:8,1
+
+########
+# note #
+########
+note  0.0, triangle_line:8:left_score, none                         # I just love for you
+
+note 10.5, l_line:0:left_score,        none                         # あ
+note  0.5, none,                         r_line:0:right_score        # ざ
+note  0.5, l_line:0:left_score,        none                         # や
+note  0.5, none,                         r_line:0:right_score        # か
+note  0.5, l_line:0:left_score,        none                         # に
+note  0.5, none,                         r_line:0:right_score        # ほ
+note  0.5, l_line:0:left_score,        none                         # ら
+note  0.5, none,                         r_line:0:right_score        # か
+note  0.5, l_line:0:left_score,        none                         # が
+note  0.5, none,                         r_line:0:right_score        # や
+note  0.5, l_line:0:left_score,        none                         # く
+
+note  1.0, none,                         heart_line:5:right_score    # Kiss me, Kiss you, Shake in mind
+
+note  5.5, l_line:0:star_score,          none                         # ほ
+note  0.5, none,                         r_line:0:right_score        # し
+note  0.5, l_line:0:left_score,        none                         # ぞ
+note  0.5, l_line:0:left_score,        none                         # ら
+note  0.5, l_line:2:both_score,          r_line:1:both_score          # に
+
