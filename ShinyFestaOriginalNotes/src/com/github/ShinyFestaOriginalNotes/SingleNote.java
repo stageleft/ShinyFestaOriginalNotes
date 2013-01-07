@@ -114,12 +114,12 @@ public class SingleNote extends SingleNoteDirectionLibrary {
 	{
 		AffineTransform op = new AffineTransform();
 		// 操作2:平行移動 (Affine変換行列は後の操作を先に書く仕様らしい)
-		op.translate((getPosition(t_current, p_0).x - Note.getWidth()/2),
-		             (getPosition(t_current, p_0).y - Note.getHeight()/2));
+		op.translate((getPosition(t_current, p_0).x - (Note.getWidth()+0)/2),
+		             (getPosition(t_current, p_0).y - (Note.getHeight()+0)/2));
 		// 操作1:回転移動
 		if (is_note_rotatable == true)
 		{
-			op.rotate(getDirection(t_current), (Note.getWidth()/2), (Note.getHeight()/2));
+			op.rotate(getDirection(t_current), (double)(((double)Note.getWidth())/2), (double)(((double)Note.getHeight())/2));
 		}
 		canvas.createGraphics().drawImage(Note, op, null);
 		return canvas;

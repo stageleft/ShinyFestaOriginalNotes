@@ -134,27 +134,31 @@ public class AllNotes extends ShinyFestaOriginalNotes {
 				{
 					String note_command = text[0].replaceFirst("note *","");
 					/*
-					########
-					# note #
-					########
-					note  0.0, triangle_line:8:left_score, none                         # I just love for you
+						#############################################
+						# note                                      #
+						# command:                                  #
+						#  note offset,line,length,score            #
+						#        offset as float(0 to end of music) #
+						#        length as float(0 to end of music) #
+						#        line   as score_ID(String)         #
+						#        score  as image_ID(String)         #
+						#############################################
+						note  0.0, l_line,0  ,left_score        # [0]じゃじゃっ
 					*/
 					// ノートのオフセット計算
-					parse_note_offset = parse_note_offset + Double.valueOf(note_command.split(" *, *")[0]);
+					String[] params_string = note_command.split(" *, *");
+					parse_note_offset = parse_note_offset + Double.valueOf(params_string[0]);
 
-					// 左側ノートの処理
-					String[] l_params_string = note_command.split(" *, *")[1].split(" *: *");
-					if (l_params_string[0].compareTo("none") != 0)
+					// ノートの処理
+					if (params_string[1].compareTo("none") != 0)
 					{
-						noteList.get(l_params_string[0]).add_note(parse_note_offset, Double.valueOf(l_params_string[1]),
-								                                  imageList.get(l_params_string[2]), isImageRotatedList.get(l_params_string[2]));
-					}
-					// 右側ノートの処理
-					String[] r_params_string = note_command.split(" *, *")[2].split(" *: *");
-					if (r_params_string[0].compareTo("none") != 0)
-					{
-						noteList.get(r_params_string[0]).add_note(parse_note_offset, Double.valueOf(r_params_string[1]),
-	                                                              imageList.get(r_params_string[2]), isImageRotatedList.get(r_params_string[2]));					
+						double note_length = Double.valueOf(params_string[2]);
+						if (note_length == 0)
+						{
+							note_length = 1 / getTimePerFrame();
+						}
+						noteList.get(params_string[1]).add_note(parse_note_offset, note_length,
+								                                  imageList.get(params_string[3]), isImageRotatedList.get(params_string[3]));
 					}
 				}
 			}

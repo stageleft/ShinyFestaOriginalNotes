@@ -10,8 +10,8 @@
 #  bpm beat_per_minutes   #
 #  high_speed note_speed  #
 ###########################
-bpm        138
-high_speed 1.0
+bpm        137
+high_speed 1.0 # Not supported. Set "1.0".
 
 ##############################################
 # image setup                                #
@@ -37,7 +37,7 @@ image target;               Target.png,        false
 # score and line setup                                                                         #
 # command:                                                                                     #
 #  score score_ID; target_parameters; base_line_image; long_score_image; score_description     #
-#    score_ID       as String                                                                  #
+#    score_ID       as String (never set "none")                                               #
 #    target_parameters as String:                                                              #
 #      target_image,position_x,position_y                                                      #
 #        targt_image as image_ID(String)                                                       #
@@ -66,6 +66,8 @@ image target;               Target.png,        false
 #            parameter 3: offset of Direction set                                              #
 #            parameter 4: Direction set length                                                 #
 ################################################################################################
+#左手用(前奏専用) 名称「o_line」長さ4[beat]、角度0[pi-rad]固定
+score o_line;target,427,340;left_line,left_line_end;left_long_score,left_long_score_end;line_note:0,line_note:0,line_note:0,line_note:0,0
 #左手用 名称「l_line」長さ4[beat]、角度0[pi-rad]固定
 score l_line;target,427,340;left_line,left_line_end;left_long_score,left_long_score_end;line_note:0,line_note:0,line_note:0,line_note:0,0
 #左手用 名称「triangle_line」長さ6[beat]
@@ -75,28 +77,296 @@ score r_line;target,427,340;right_line,right_line_end;right_long_score,right_lon
 #右手用 名称「heart_line」長さ8[beat]、角度0[pi-rad]固定
 score heart_line;target,457,290;right_line,right_line_end;right_long_score,right_long_score_end;heart_note:1:-0.5:7:8,heart_note:1:-0.5:6:8,heart_note:1:-0.5:5:8,heart_note:1:-0.5:4:8,heart_note:1:-0.5:3:8,heart_note:1:-0.5:2:8,heart_note:1:-0.5:1:8,heart_note:1:-0.5:0:8,1
 
-########
-# note #
-########
-note  0.0, triangle_line:8:left_score, none                         # I just love for you
+###########################################
+# note                                    #
+# command:                                #
+#  note offset,line,length,score          #
+#    offset as float(0 to end of music)   #
+#    line   as score_ID(String) or "none" #
+#    length as float(0 to end of music)   #
+#    score  as image_ID(String)           #
+###########################################
 
-note 10.5, l_line:0:left_score,        none                         # あ
-note  0.5, none,                         r_line:0:right_score        # ざ
-note  0.5, l_line:0:left_score,        none                         # や
-note  0.5, none,                         r_line:0:right_score        # か
-note  0.5, l_line:0:left_score,        none                         # に
-note  0.5, none,                         r_line:0:right_score        # ほ
-note  0.5, l_line:0:left_score,        none                         # ら
-note  0.5, none,                         r_line:0:right_score        # か
-note  0.5, l_line:0:left_score,        none                         # が
-note  0.5, none,                         r_line:0:right_score        # や
-note  0.5, l_line:0:left_score,        none                         # く
+### So, I love you, my darling. And stay forever. ###[ 8 beat]
+note  0.0, o_line,0  ,left_score      # [0]じゃじゃっ
+note  0.5, o_line,0.5,left_score
 
-note  1.0, none,                         heart_line:5:right_score    # Kiss me, Kiss you, Shake in mind
+note  1.5, o_line,0  ,left_score      # [2]じゃじゃっ
+note  0.5, o_line,0.5,left_score
 
-note  5.5, l_line:0:star_score,          none                         # ほ
-note  0.5, none,                         r_line:0:right_score        # し
-note  0.5, l_line:0:left_score,        none                         # ぞ
-note  0.5, l_line:0:left_score,        none                         # ら
-note  0.5, l_line:2:both_score,          r_line:1:both_score          # に
+note  1.0, o_line,0,left_score        # [3.5]じゃっじゃっじゃー
+note  1.0, o_line,0,left_score
+note  1.0, o_line,2,left_score
+note  2.5, none
+
+### It's dazzling like a star, I'm falling for you ###[ 8 beat]
+note  0.0, o_line,0  ,left_score      # [0]じゃじゃっ
+note  0.5, o_line,0.5,left_score
+
+note  1.5, o_line,0  ,left_score      # [2]じゃじゃっ
+note  0.5, o_line,0.5,left_score
+
+note  1.0, o_line,0,left_score        # [3.5]じゃっじゃっじゃー
+note  1.0, o_line,0,left_score
+note  1.0, o_line,2,left_score
+note  2.5, none
+
+### （間奏9小節） ###[ 36 beat]
+note 36.0, none
+
+note  0.5, none
+### 前に 進めない これ以上 そんな時には   ###[ 16 beat]
+note  0.0, l_line,0,left_score        # [ 0  ]どっ
+note  1.0, l_line,0,left_score        # [ 1  ]ちゃっ
+note  1.0, l_line,0,left_score        # [ 2  ]どっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]どー
+note  1.5, l_line,0,left_score        # [ 5  ]ちゃっ
+note  1.0, l_line,0,left_score        # [ 6  ]どっ
+note  0.5, l_line,0,left_score        # [ 6.5]どっ
+note  0.5, l_line,0,left_score        # [ 7  ]ちゃっ
+
+note  1.0, l_line,0,left_score        # [ 8  ]どっ
+note  1.0, l_line,0,left_score        # [ 9  ]ちゃっ
+note  1.0, l_line,0,left_score        # [10  ]どっ
+note  1.0, l_line,0,left_score        # [11  ]ちゃ
+note  0.5, l_line,0,left_score        # [11.5]どー
+note  1.5, l_line,0,left_score        # [13  ]ちゃっ
+note  1.0, l_line,0,left_score        # [14  ]どっ
+note  0.5, l_line,0,left_score        # [14.5]どっ
+note  0.5, l_line,0,left_score        # [15  ]ちゃっ
+note  1.0, none
+
+### いつも 心で 呼ぶよ あなたの名前       ###[ 16 beat]
+note  0.0, l_line,0,left_score        # [ 0  ]どっ
+note  1.0, l_line,0,left_score        # [ 1  ]ちゃっ
+note  1.0, l_line,0,left_score        # [ 2  ]どっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]どー
+note  1.5, l_line,0,left_score        # [ 5  ]ちゃっ
+note  1.0, l_line,0,left_score        # [ 6  ]どっ
+note  0.5, l_line,0,left_score        # [ 6.5]どっ
+note  0.5, l_line,0,left_score        # [ 7  ]ちゃっ
+
+note  1.0, l_line,0,left_score        # [ 8  ]どっ
+note  1.0, l_line,0,left_score        # [ 9  ]ちゃっ
+note  1.0, l_line,0,left_score        # [10  ]どっ
+note  1.0, l_line,0,left_score        # [11  ]ちゃ
+note  0.5, l_line,0,left_score        # [11.5]どー
+note  1.5, l_line,0,left_score        # [13  ]ちゃっ
+note  1.0, l_line,0,left_score        # [14  ]どっ
+note  0.5, l_line,0,left_score        # [14.5]どっ
+note  0.5, l_line,0,left_score        # [15  ]ちゃっ
+note  1.0, none
+note -0.5, none
+
+### 抱いた 憧れ 今も 変わらないわ         ###[ 16 beat]
+note  1.5, l_line,0,left_score        # [ 1.5]ど
+note  2.0, l_line,0,left_score        # [ 3.5]ど
+note  2.0, l_line,0,left_score        # [ 5.5]ど
+note  2.0, l_line,0,left_score        # [ 7.5]ど
+note  2.0, l_line,0,left_score        # [ 9.5]ど
+note  2.0, l_line,0,left_score        # [11.5]ど
+note  2.0, l_line,0,left_score        # [13.5]ど
+note  2.0, l_line,0,left_score        # [15.5]ど
+note  0.5, none
+
+### 過ごした 日々は 優しく 溶け出して行く ###[ 16 beat]
+note  1.5, l_line,0,left_score        # [ 1.5]ど
+note  2.0, l_line,0,left_score        # [ 3.5]ど
+note  2.0, l_line,0,left_score        # [ 5.5]ど
+note  2.0, l_line,0,left_score        # [ 7.5]ど
+note  2.0, l_line,0,left_score        # [ 9.5]ど
+note  2.0, l_line,0,left_score        # [11.5]ど
+note  2.0, l_line,0,left_score        # [13.5]ど
+note  2.0, l_line,0,left_score        # [15.5]ど
+note  0.5, none
+
+### あなたと いるそれだけで     ###[ 16 beat]
+note  3.5, l_line,0,left_score        # [ 3.5]あ
+note  0.5, r_line,0,right_score       # [ 4  ]な
+note  0.5, l_line,0,left_score        # [ 4.5]た
+note  0.5, r_line,0,right_score       # [ 5  ]と
+note  0.5, l_line,0,left_score        # [ 5.5]い
+note  0.5, r_line,0,right_score       # [ 6  ]る
+note  0.5, l_line,0,left_score        # [ 6.5]そ
+note  0.5, r_line,0,right_score       # [ 7  ]れ
+note  0.5, l_line,0,left_score        # [ 7.5]だ
+note  0.5, r_line,0,right_score       # [ 8  ]け
+note  0.5, l_line,0,left_score        # [ 8.5]で
+note  1.5, triangle_line,8,left_score # [10  ]I just love for you
+note  6.0, none
+
+### 鮮やかに ほら輝く           ###[ 15 beat]
+note  3.5, l_line,0,left_score        # [ 3.5]あ
+note  0.5, r_line,0,right_score       # [ 4]ざ
+note  0.5, l_line,0,left_score        # [ 4.5]や
+note  0.5, r_line,0,right_score       # [ 5]か
+note  0.5, l_line,0,left_score        # [ 5.5]に
+note  0.5, r_line,0,right_score       # [ 6]ほ
+note  0.5, l_line,0,left_score        # [ 6.5]ら
+note  0.5, r_line,0,right_score       # [ 7]か
+note  0.5, l_line,0,left_score        # [ 7.5]が
+note  0.5, r_line,0,right_score       # [ 8]や
+note  0.5, l_line,0,left_score        # [ 8.5]く
+note  1.0, heart_line,5,right_score   # [ 9.5]Kiss me, Kiss you, Shake in mind
+note  5.5, none
+
+### 星空にきらめく あのかけらは ###[ 16 beat]
+note  0.0, l_line,0,star_score        # [ 0  ]ほ
+note  0.5, r_line,0,right_score       # [ 0.5]し
+note  0.5, l_line,0,left_score        # [ 1  ]ぞ
+note  0.5, r_line,0,right_score       # [ 1.5]ら
+note  0.5, l_line,1,both_score        # [ 2  ]に
+note  0.0, r_line,1,both_score
+note  1.5, l_line,0,left_score        # [ 3.5]き
+note  0.5, l_line,0,left_score        # [ 4  ]ら
+note  1.0, r_line,0,right_score       # [ 5  ]め
+note  0.5, r_line,0,right_score       # [ 5.5]く
+note  4.0, l_line,0,left_score        # [ 9.5]あ
+note  0.5, l_line,0,left_score        # [10.0]の
+note  2.0, l_line,0,left_score        # [12.0]か
+note  0.5, r_line,0,right_score       # [12.5]け
+note  0.5, l_line,0,left_score        # [13.0]ら
+note  0.5, r_line,0,right_score       # [13.5]は
+note  2.5, none
+
+### まるで二人を照らす プリズム ###[ 16 beat]
+note  0.0, l_line,0  ,left_score        # [ 0  ]ま
+note  0.5, r_line,0  ,right_score       # [ 0.5]る
+note  0.5, l_line,0  ,left_score        # [ 1  ]で
+note  0.5, r_line,0  ,right_score       # [ 1.5]ふ
+note  0.5, l_line,0  ,both_score
+note  0.0, r_line,0  ,both_score        # [ 2  ]た
+note  1.5, l_line,0  ,left_score        # [ 3.5]り
+note  0.5, l_line,1  ,both_score
+note  0.0, r_line,1  ,both_score        # [ 4  ]を
+note  3.5, l_line,0  ,left_score        # [ 7.5]て
+note  0.5, l_line,0  ,left_score        # [ 8.0]ら
+note  0.5, l_line,0.5,left_score        # [ 8.5]す
+note  1.0, r_line,2.5,right_score       # [ 9.5]ぷ
+note  3.0, l_line,0  ,left_score        # [12.5]り
+note  0.5, r_line,0  ,right_score       # [13.0]ず
+note  0.5, l_line,0  ,left_score        # [13.5]む
+note  5.0, none
+
+### キラキラ光る この気持ち         ###[  8 beat]
+note -0.5, l_line,0,left_score        # [-0.5]き
+note  0.5, r_line,0,right_score       # [ 0  ]ら
+note  0.5, l_line,0,left_score        # [ 0.5]き
+note  0.5, r_line,0,right_score       # [ 1  ]ら
+note  0.5, l_line,0,left_score        # [ 1.5]ひ
+note  0.5, r_line,0,right_score       # [ 2  ]か
+note  0.5, l_line,0,left_score        # [ 2.5]る
+note  1.0, l_line,0,left_score        # [ 3.5]こ
+note  0.5, r_line,0,right_score       # [ 4  ]の
+note  0.5, l_line,0,left_score        # [ 4.5]き
+note  0.5, r_line,0,right_score       # [ 5  ]も
+note  0.5, l_line,0,left_score        # [ 5.5]ち
+note  2.5, none
+
+### 愛されること 愛すること         ###[  8 beat]
+note -0.5, l_line,0,left_score        # [-0.5]あ
+note  0.5, r_line,0,right_score       # [ 0  ]い
+note  0.5, l_line,0,left_score        # [ 0.5]さ
+note  0.5, r_line,0,right_score       # [ 1  ]れ
+note  0.5, l_line,0,left_score        # [ 1.5]る
+note  0.5, r_line,0,right_score       # [ 2  ]こ
+note  0.5, l_line,0,left_score        # [ 2.5]と
+note  0.5, r_line,0,right_score       # [ 3  ]あ
+note  0.5, l_line,0,left_score        # [ 3.5]い
+note  0.5, r_line,0,right_score       # [ 4  ]す
+note  0.5, l_line,0,left_score        # [ 4.5]る
+note  0.5, r_line,0,right_score       # [ 5  ]こ
+note  0.5, l_line,0,left_score        # [ 5.5]と
+note  2.5, none
+
+### 時が流れて 光りだす             ###[  8 beat]
+note -0.5, r_line,0,right_score       # [-0.5]と
+note  0.5, l_line,0,left_score        # [ 0  ]き
+note  0.5, r_line,0,right_score       # [ 0.5]が
+note  0.5, l_line,0,left_score        # [ 1  ]な
+note  0.5, r_line,0,right_score       # [ 1.5]が
+note  0.5, l_line,0,left_score        # [ 2  ]れ
+note  0.5, r_line,0,right_score       # [ 2.5]て
+note  1.0, r_line,0,right_score       # [ 3.5]ひ
+note  0.5, l_line,0,left_score        # [ 4  ]か
+note  0.5, r_line,0,right_score       # [ 4.5]り
+note  0.5, l_line,0,left_score        # [ 5  ]だ
+note  0.5, r_line,0,right_score       # [ 5.5]す
+note  2.5, none
+
+### 想い出一杯 作るのよ             ###[  8 beat]
+note -0.5, r_line,0,right_score       # [-0.5]お
+note  0.5, l_line,0,left_score        # [ 0  ]も
+note  0.5, r_line,0,right_score       # [ 0.5]い
+note  0.5, l_line,0,left_score        # [ 1  ]で
+note  0.5, r_line,0,right_score       # [ 1.5]い
+note  0.5, l_line,0,left_score        # [ 2  ]っ
+note  0.5, r_line,0,right_score       # [ 2.5]ぱい
+note  1.0, r_line,0,right_score       # [ 3.5]つ
+note  0.5, l_line,0,left_score        # [ 4  ]く
+note  0.5, r_line,0,right_score       # [ 4.5]る
+note  0.5, l_line,0,left_score        # [ 5  ]の
+note  0.5, r_line,0,right_score       # [ 5.5]よ
+note  2.5, none
+
+### 二人が逢えた 人生も             ###[  8 beat]
+note  0.0, r_line,0,right_score       # [ 0  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 0.5]らっ
+note  1.0, l_line,0,left_score        # [ 1.5]ら
+note  0.5, l_line,0,left_score        # [ 2  ]らっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]らっ
+note  1.0, l_line,0,left_score        # [ 4.5]ら
+note  0.5, l_line,0,left_score        # [ 5  ]らっ
+note  1.0, l_line,0,left_score        # [ 6  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 6.5]ら
+note  0.5, l_line,0,left_score        # [ 7  ]ら
+note  0.5, l_line,0,left_score        # [ 7.5]ら
+note  0.5, none
+
+### 一度きりだと 知ってるわ         ###[  8 beat]
+note  0.0, r_line,0,right_score       # [ 0  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 0.5]らっ
+note  1.0, l_line,0,left_score        # [ 1.5]ら
+note  0.5, l_line,0,left_score        # [ 2  ]らっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]らっ
+note  1.0, l_line,0,left_score        # [ 4.5]らっ
+note  1.0, l_line,0,left_score        # [ 5.5]らー
+note  1.0, l_line,0,left_score        # [ 6.5]ら
+note  0.5, l_line,0,left_score        # [ 7  ]ら
+note  0.5, l_line,0,left_score        # [ 7.5]ら
+note  0.5, none
+
+### 手と手つないで 歩き出す         ###[  8 beat]
+note  0.0, r_line,0,right_score       # [ 0  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 0.5]らっ
+note  1.0, l_line,0,left_score        # [ 1.5]ら
+note  0.5, l_line,0,left_score        # [ 2  ]らっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]らっ
+note  1.0, l_line,0,left_score        # [ 4.5]ら
+note  0.5, l_line,0,left_score        # [ 5  ]らっ
+note  1.0, l_line,0,left_score        # [ 6  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 6.5]ら
+note  0.5, l_line,0,left_score        # [ 7  ]ら
+note  0.5, l_line,0,left_score        # [ 7.5]ら
+note  0.5, none
+
+### あなたと生きる 素晴らしい世界！ ###[  8 beat]
+note  0.0, r_line,0,right_score       # [ 0  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 0.5]らっ
+note  1.0, l_line,0,left_score        # [ 1.5]ら
+note  0.5, l_line,0,left_score        # [ 2  ]らっ
+note  1.0, l_line,0,left_score        # [ 3  ]ちゃ
+note  0.5, l_line,0,left_score        # [ 3.5]らっ
+note  1.0, l_line,0,left_score        # [ 4.5]ら
+note  1.0, l_line,0,left_score        # [ 5.5]らっ
+note  1.5, r_line,0,right_score       # [ 7  ]せ
+note  0.5, r_line,0,right_score       # [ 7.5]かい
+note  0.5, none
+
+### （終わりにはスコアなし） ###[ 32 beat]
 

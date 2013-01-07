@@ -50,6 +50,7 @@ public class ApplicationMain extends JFrame {
 	 * Create the frame.
 	 */
 	public ApplicationMain() {
+		setTitle("ShinyFesta Original Notes Maker");
 		// エラー表示とかしたいので先にテキストエリアの定義(だけ)
 		textArea = new TextArea();
 		textArea.setText("");
@@ -69,7 +70,7 @@ public class ApplicationMain extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblShinyfestaoriginalnotesMaker = new JLabel("ShinyFestaOriginalNotes maker");
+		JLabel lblShinyfestaoriginalnotesMaker = new JLabel("ShinyFesta Original Notes Maker");
 		lblShinyfestaoriginalnotesMaker.setBounds(5, 5, 429, 30);
 		contentPane.add(lblShinyfestaoriginalnotesMaker);
 		
